@@ -231,7 +231,7 @@ class Linear_Reg_Diagnostics():
         xtemp, ytemp = self.__cooks_dist_line(1) # 1 line
         ax.plot(xtemp, ytemp, label="Cook's distance = 1", lw=1, ls='--', color='red') # fixed
 
-        ax.set_xlim(0, max(self.leverage)*1.1)
+        ax.set_xlim(min(self.leverage), max(self.leverage))
         ax.set_title('Studentized Residuals vs Leverage', fontweight="bold")
         ax.set_xlabel('Leverage')
         ax.set_ylabel('Studentized Residuals')
@@ -251,7 +251,7 @@ class Linear_Reg_Diagnostics():
         vif_df["VIF Factor"] = [variance_inflation_factor(self.xvar, i) for i in range(self.xvar.shape[1]) if i != 0]
 
         print(vif_df
-                .sort_values("VIF Factor")
+                .sort_values("VIF Factor", ascending=False)
                 .round(2))
 
 
