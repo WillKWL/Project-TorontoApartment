@@ -1,4 +1,4 @@
-district,All_Apartments_Listed,All_Apartments_Leased,Bachelor_Total_Leased,Bachelor_Avg_Lease_Rate,One_Bedroom_Total_Leased,One_Bedroom_Avg_Lease_Rate,Two_Bedroom_Total_Leased,Two_Bedroom_Avg_Lease_Rate,Three_Bedroom_Total_Leased,Three_Bedroom_Avg_Lease_Rate,Year,Quarter
+district,Listed_AllApartments,Leased_AllApartments,TotalLeased_Bachelor,AvgLeaseRate_Bachelor,TotalLeased_OneBedroom,AvgLeaseRate_OneBedroom,TotalLeased_TwoBedroom,AvgLeaseRate_TwoBedroom,TotalLeased_ThreeBedroom,AvgLeaseRate_ThreeBedroom,Year,Quarter
 TREB Total,7096,3804,96,1306,2111,1538,1522,2089,75,2079,2012,1
 TREB Total,8893,4771,143,1285,2552,1556,1950,2088,126,2625,2012,2
 TREB Total,8845,5241,119,1336,2733,1605,2250,2097,139,2660,2012,3

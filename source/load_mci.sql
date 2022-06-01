@@ -230,19 +230,17 @@ FROM
     homicide;
 
 SELECT
-    count(occurrence_unique_id),
-    count(occurrence_date),
-    count(occurrence_year),
-    count(occurrence_month),
-    count(occurrence_day),
-    count(occurrence_dayofweek),
-    count(occurrence_hour),
-    count(MCI),
-    count(hood_id),
-    count(neighbourhood),
-    count(longitude),
-    count(latitude)
+    CASE WHEN occurrence_unique_id IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_date IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_year IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_month IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_day IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_dayofweek IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN occurrence_hour IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN MCI IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN hood_id IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN neighbourhood IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN longitude IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN latitude IS NULL THEN 1 ELSE 0 END,
 FROM
     mci_df;
-
-SELECT * from mci_df limit 5;
