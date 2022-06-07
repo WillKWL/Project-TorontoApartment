@@ -236,10 +236,31 @@ SELECT
 FROM
     homicide;
 
-SELECT count(*) from mci_data limit 1;
-SELECT count(*) from shootings limit 1;
-select count(*) from homicide limit 1;
-select count(*) from all_df;
+SELECT
+    count(*)
+FROM
+    mci_data
+LIMIT
+    1;
+
+SELECT
+    count(*)
+FROM
+    shootings
+LIMIT
+    1;
+
+SELECT
+    count(*)
+FROM
+    homicide
+LIMIT
+    1;
+
+SELECT
+    count(*)
+FROM
+    all_df;
 
 -- check number of missing data for each column
 SELECT
@@ -309,8 +330,8 @@ SELECT
     avg(HOUR),
     max(HOUR)
 FROM
-    describe_dates; 
-    
+    describe_dates;
+
 -- if we cannot imply the missing hour, can we drop rows with missing occurrence_hour?
 -- dropping rows with missing occurrence_hour would mean dropping all homicide records
 SELECT
@@ -329,28 +350,31 @@ ALTER TABLE
 
 -- imply the other missing data with occurrence_date
 -- occurrence_month, occurrence_day, occurrence_dayofyear, occurrence_dayofweek
-UPDATE 
+UPDATE
     all_df
 SET
-    occurrence_month = date_part('month', occurrence_date)
+    occurrence_month = to_char(occurrence_date, 'FMMonth')
 WHERE
     occurrence_month IS NULL;
-UPDATE 
+
+UPDATE
     all_df
 SET
     occurrence_day = date_part('day', occurrence_date)
 WHERE
     occurrence_day IS NULL;
+
 UPDATE
     all_df
 SET
     occurrence_dayofyear = date_part('doy', occurrence_date)
 WHERE
     occurrence_dayofyear IS NULL;
+
 UPDATE
     all_df
 SET
-    occurrence_dayofweek = date_part('dow', occurrence_date)
+    occurrence_dayofweek = to_char(occurrence_date, 'FMDay')
 WHERE
     occurrence_dayofweek IS NULL;
 
@@ -372,8 +396,257 @@ FROM
     all_df;
 
 -- let's drop the rows with missing occurrence_date
-select * from all_df where occurrence_date is null;
-
-DELETE from all_df
+SELECT
+    *
+FROM
+    all_df
 WHERE
     occurrence_date IS NULL;
+
+DELETE FROM
+    all_df
+WHERE
+    occurrence_date IS NULL;
+
+-- Check for inconsistencies among date columns
+-- occurrence_year is missing
+SELECT
+    occurrence_date,
+    occurrence_year
+FROM
+    all_df
+WHERE
+    date_part('year', occurrence_date) != occurrence_year;
+
+UPDATE
+    all_df
+SET
+    occurrence_year = date_part('year', occurrence_date)
+WHERE
+    date_part('year', occurrence_date) != occurrence_year;
+
+-- occurrence_month is fine
+SELECT
+    occurrence_date,
+    occurrence_month
+FROM
+    all_df
+WHERE
+    to_char(occurrence_date, 'FMMonth') != occurrence_month;
+
+-- occurrence_day is missing
+SELECT
+    date_part('day', occurrence_date),
+    occurrence_day
+FROM
+    all_df
+WHERE
+    date_part('day', occurrence_date) != occurrence_day;
+
+UPDATE
+    all_df
+SET
+    occurrence_day = date_part('day', occurrence_date)
+WHERE
+    date_part('day', occurrence_date) != occurrence_day;
+
+-- , occurrence_dayofyear is missing
+SELECT
+    date_part('doy', occurrence_date),
+    occurrence_dayofyear
+FROM
+    all_df
+WHERE
+    date_part('doy', occurrence_date) != occurrence_dayofyear;
+
+UPDATE
+    all_df
+SET
+    occurrence_dayofyear = date_part('doy', occurrence_date)
+WHERE
+    date_part('doy', occurrence_date) != occurrence_dayofyear;
+
+-- occurrence_dayofweek have white space trailing
+SELECT
+    to_char(occurrence_date, 'FMDay'),
+    occurrence_dayofweek
+FROM
+    all_df
+WHERE
+    to_char(occurrence_date, 'FMDay') != occurrence_dayofweek;
+
+UPDATE
+    all_df
+SET
+    occurrence_dayofweek = TRIM(occurrence_dayofweek)
+WHERE
+    to_char(occurrence_date, 'FMDay') != occurrence_dayofweek;
+
+-- check inconsistency among date columns again
+SELECT
+    count(*) AS year
+FROM
+    all_df
+WHERE
+    date_part('year', occurrence_date) != occurrence_year;
+
+SELECT
+    count(*) AS MONTH
+FROM
+    all_df
+WHERE
+    to_char(occurrence_date, 'FMMonth') != occurrence_month;
+
+SELECT
+    count(*) AS DAY
+FROM
+    all_df
+WHERE
+    date_part('day', occurrence_date) != occurrence_day;
+
+SELECT
+    count(*) AS dayofyear
+FROM
+    all_df
+WHERE
+    date_part('doy', occurrence_date) != occurrence_dayofyear;
+
+SELECT
+    count(*) AS dayofweek
+FROM
+    all_df
+WHERE
+    to_char(occurrence_date, 'FMDay') != occurrence_dayofweek;
+
+-- check inconsistency between hood_id and neighbourhood
+-- distinct count of hood_id
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            hood_id
+        FROM
+            all_df
+        GROUP BY
+            hood_id
+    ) AS id_count;
+
+-- distinct count of neighbourhood
+SELECT
+    count(*)
+FROM
+    (
+        SELECT
+            neighbourhood
+        FROM
+            all_df
+        GROUP BY
+            neighbourhood
+    ) AS hood_count;
+
+-- no duplicate neighbourhood since all combinations have only 1 row
+SELECT
+    neighbourhood,
+    hood_id,
+    row_number() OVER (
+        PARTITION BY neighbourhood
+        ORDER BY
+            neighbourhood
+    ) AS row_count
+FROM
+    all_df
+GROUP BY
+    neighbourhood,
+    hood_id
+ORDER BY
+    row_count DESC;
+
+-- there are 3 combinations with >= 1 rows -> duplicate record
+SELECT
+    neighbourhood,
+    hood_id,
+    row_number() OVER (
+        PARTITION BY hood_id
+        ORDER BY
+            hood_id
+    ) AS row_count
+FROM
+    all_df
+GROUP BY
+    neighbourhood,
+    hood_id
+ORDER BY
+    row_count DESC;
+
+-- issue was that there are extra punctuation in neighbourhood
+SELECT
+    neighbourhood,
+    hood_id
+FROM
+    all_df
+WHERE
+    hood_id = '54'
+    OR hood_id = '118'
+    OR hood_id = '117'
+GROUP BY
+    neighbourhood,
+    hood_id
+ORDER BY
+    hood_id;
+
+-- fixing the 3 neighbourhoods
+UPDATE
+    all_df
+SET
+    neighbourhood = 'L ''Amoreaux'
+WHERE
+    hood_id = '117';
+
+UPDATE
+    all_df
+SET
+    neighbourhood = 'Tam O ''Shanter-Sullivan'
+WHERE
+    hood_id = '118';
+
+UPDATE
+    all_df
+SET
+    neighbourhood = 'O ''Connor-Parkview'
+WHERE
+    hood_id = '54';
+
+-- check that issue is now fixed
+SELECT
+    neighbourhood,
+    hood_id
+FROM
+    all_df
+WHERE
+    hood_id = '54'
+    OR hood_id = '118'
+    OR hood_id = '117'
+GROUP BY
+    neighbourhood,
+    hood_id
+ORDER BY
+    hood_id;
+
+-- consistent with neighbourhoods.geojson
+update 
+all_df
+set
+    neighbourhood = 'Mimico (includes Humber Bay Shores)'
+where
+    hood_id = '17';
+
+-- add occurrence_quarter column
+alter table all_df
+add column occurrence_quarter INT;
+update all_df
+set occurrence_quarter = date_part('quarter', occurrence_date);
+
+select occurrence_date, occurrence_quarter
+from all_df
+limit 5
