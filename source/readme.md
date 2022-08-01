@@ -49,3 +49,34 @@ Realtor.CA neighbourhood [overview](https://www.realtor.ca/)
 - <img src='../data/image/2022-04-02-17-54-06.png'>
 Toronto Police Services [Power BI dashboard](https://app.powerbi.com/view?r=eyJrIjoiNTAwOTNkMTYtOWQwNS00Y2M3LWJkODAtNDU1NjNkZTg1YWVkIiwidCI6Ijg1MjljMjI1LWFjNDMtNDc0Yy04ZmI0LTBmNDA5NWFlOGQ1ZCIsImMiOjN9)
 - <img src='../data/image/2022-04-02-17-54-34.png'>
+
+# How to
+- Folder structure
+  - env.yml file to reproduce working environment with required packages
+  - source folder
+    - jupyter notebooks to run 
+- data folder
+  - image: screenshot attached in markdown)
+  - processed: data cleaned and ready for analysis
+  - raw: data extracted from various sources
+- ETL pipeline (import data from raw folder, export data to processed folder)
+  - 0-api: crime and traffic collision data from Toronto Police Services API
+  - 1a: TTC station location and other information from TTC website
+  - 1b: extract neighbourhood information from Toronto Police Services
+  - 1c: apartment rental information from Toronto Regional Real Estate Board (TRREB)
+  - 1d: crime data 
+    - SQL alternative: load_mci.sql
+  - 1e: traffic collision data
+    - SQL alternative: load_collision.sql
+- Exploratory Data Analysis
+  - 2a: population and distance from UofT for 140 Toronto neighbourhoods defined by Toronto Police Services
+  - 2b: yearly and quarterly trend in apartment lease rates
+  - 2c: time trend and distribution among 140 neighbourhoods in crime rates 
+  - 2d: time trend and distribution among 140 neighbourhoods in traffic collisions
+  - 2e: all layers combined (rent + crime + traffic collision + distance from UofT)
+- Statistical analysis (panel data regression and ARMA modelling)
+  - 3a: 
+    - panel data regression for rent
+    - ARMA modelling for rent, crime, traffic collision
+  - 3b:
+    - plot with predicted results for 140 neighbourhoods
