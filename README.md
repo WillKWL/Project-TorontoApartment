@@ -1,7 +1,8 @@
 # Framing the business problem
 > **Objective: Where should I rent an apartment in the City of Toronto now / in the coming future?**
 - Tangible output
-  - An interactive map where I can quickly locate the ideal areas to search for rental listings
+  - An interactive map ([Tableau dashboard](https://public.tableau.com/app/profile/willkwl/viz/TTC_stations_area/Overview)) where I can quickly locate the ideal areas to search for rental listings
+  -  
 - Assumptions
   - **Ideal location = safe + cheap + nearby** (more details on the 3 factors below)
   - As an international student without a driving license, I would have to rely on TTC to move around the city and that implies I do not live outside the City of Toronto
