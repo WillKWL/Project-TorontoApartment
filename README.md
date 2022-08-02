@@ -1,7 +1,7 @@
 # Framing the business problem
 > **Objective: Where should I rent an apartment in the City of Toronto now / in the coming future?**
 - Tangible output
-  - An interactive map ([Tableau dashboard](https://public.tableau.com/app/profile/willkwl/viz/TTC_stations_area/Overview)) where I can quickly locate the ideal areas to search for rental listings
+  - An interactive map ([Tableau dashboard](https://public.tableau.com/app/profile/willkwl/viz/TTC_stations_area/Overview)) where I can quickly locate the ideal areas to search for rental listings 
   - <img src="../master/data/image/2022-08-01-22-04-46.png">
 - Assumptions
   - **Ideal location = safe + cheap + nearby** (more details on the 3 factors below)
