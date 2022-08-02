@@ -40,11 +40,11 @@
 - **what if I want to look for the ideal locations based on the 3 factors simultaneously?**
 
 Toronto Regional Real Estate Board (TRREB) [search engine](https://onlistings.trreb.ca/searchlistings#search/d17c8105b8d19ca9a20f2d67/filters)
-- <img src='../data/image/2022-04-02-17-52-51.png'>
+- <img src='../master/data/image/2022-04-02-17-52-51.png'>
 Realtor.CA neighbourhood [overview](https://www.realtor.ca/)
-- <img src='../data/image/2022-04-02-17-54-06.png'>
+- <img src='../master/data/image/2022-04-02-17-54-06.png'>
 Toronto Police Services [Power BI dashboard](https://app.powerbi.com/view?r=eyJrIjoiNTAwOTNkMTYtOWQwNS00Y2M3LWJkODAtNDU1NjNkZTg1YWVkIiwidCI6Ijg1MjljMjI1LWFjNDMtNDc0Yy04ZmI0LTBmNDA5NWFlOGQ1ZCIsImMiOjN9)
-- <img src='../data/image/2022-04-02-17-54-34.png'>
+- <img src='../master/data/image/2022-04-02-17-54-34.png'>
 
 # How to use this repository
 - Folder structure
