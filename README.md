@@ -1,4 +1,4 @@
-> **Panel data regression - where to live in Toronto among 140 neighborhoods, 2022**
+# Panel data regression - where to live in Toronto among 140 neighborhoods, 2022
 - Identified favorable neighborhoods to rent an apartment in based on 1) accessibility, 2) affordability, and 3) safety  
 - Collected geospatial data, rental market data and crime data from Toronto Police Services API, TRREB and TTC
 - Prepared data sets with ETL workflow by cleaning data and performing feature engineering with pandas and SQL
