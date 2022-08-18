@@ -1,3 +1,12 @@
+> **Panel data regression - where to live in Toronto among 140 neighborhoods, 2022**
+- Identified favorable neighborhoods to rent an apartment in based on 1) accessibility, 2) affordability, and 3) safety  
+- Collected geospatial data, rental market data and crime data from Toronto Police Services API, TRREB and TTC
+- Prepared data sets with ETL workflow by cleaning data and performing feature engineering with pandas and SQL
+- Leveraged Tableau dashboards to visualize time trends and cross-sectional patterns among neighborhoods
+- Modelled and predicted lease rates, crime rates and traffic collision rates with panel data regression and ARMA model
+- Picked a best subset regression model with time and neighborhood ID as covariates to predict lease rates
+- Bootstrapped the regression model to suggest statistical significance in F test despite violation in residual assumptions
+
 # Framing the business problem 
 > **Objective: Where should I rent an apartment in the City of Toronto?**
 - Tangible output
