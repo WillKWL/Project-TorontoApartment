@@ -1,5 +1,5 @@
 # Framing the business problem 
-> **Objective: Where should I rent an apartment in the City of Toronto now / in the coming future?**
+> **Objective: Where should I rent an apartment in the City of Toronto?**
 - Tangible output
   - An interactive map ([Tableau dashboard](https://public.tableau.com/app/profile/willkwl/viz/TorontoApartments/Overview?publish=yes)) where I can quickly locate the ideal areas to search for rental listings 
   - <img src="../master/data/image/2022-08-01-22-04-46.png">
