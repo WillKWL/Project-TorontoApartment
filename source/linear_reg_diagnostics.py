@@ -1,4 +1,9 @@
-# reference: https://www.statsmodels.org/dev/examples/notebooks/generated/linear_regression_diagnostics_plots.html
+#*    Title: linear regression diagnostics
+#*    Author: Prajwal Kafle
+#*    Date: Aug 18, 2022
+#*    Code version: 1.0
+#*    Availability: https://www.statsmodels.org/dev/examples/notebooks/generated/linear_regression_diagnostics_plots.html
+
 import numpy as np
 import seaborn as sns
 import pandas as pd
