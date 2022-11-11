@@ -88,3 +88,7 @@ Toronto Police Services [Power BI dashboard](https://app.powerbi.com/view?r=eyJr
     - ARMA modelling for rent, crime, traffic collision
   - source/3b:
     - plot with predicted results for 140 neighbourhoods
+    
+# Future update
+- OpenStreetMap for commute time (driving)
+  - private-project/gmap_location_time.ipynb
